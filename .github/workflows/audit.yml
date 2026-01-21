@@ -1,0 +1,23 @@
+name: Auditoria Estatica IEEE 1028
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Build
+      run: dotnet build
+
+    - name: Ejecutar Auditoría
+      run: pwsh audit-script.ps1
